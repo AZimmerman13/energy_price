@@ -5,6 +5,10 @@ __pycache__/
 
 # Data
 *.csv
+*.xlsx
+*.xls
+
+*.DS_Store
 
 # other
 .DS_Store
