@@ -191,7 +191,7 @@ if __name__ == '__main__':
   
     # Merge energy with the featurized cities DF to make the complete DataFrame
     # full_df = energy.merge_dfs(all_cities_df.df)
-    full_df = pd.read_csv('data/spain_data.csv')
+    full_df = pd.read_csv('s3://ajzcap3/spain_data.csv')
 
     plot_corr_matrix(full_df.df)
     plt.savefig('images/full_corr_sparse.png')
