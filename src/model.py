@@ -12,7 +12,7 @@ from sklearn.pipeline import Pipeline as SKPipe
 from sklearn.inspection import permutation_importance, plot_partial_dependence
 from sklearn.model_selection import GridSearchCV
 from src.pipeline import Pipeline
-from src.main_script import plot_corr_matrix, scree_plot, plot_num_estimators_mse
+from src.helpers import plot_corr_matrix, scree_plot, plot_num_estimators_mse
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
 from statsmodels.stats.outliers_influence import variance_inflation_factor
