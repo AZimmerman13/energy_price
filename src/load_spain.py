@@ -129,69 +129,69 @@ def plot_oob_error():
     plt.savefig('images/oob.png')
 
 if __name__ == '__main__':
-    # print("Loading Data")
-    # # read in files from s3 bucket
-    # energy = Pipeline('s3://ajzcap3/energy_dataset.csv')
-    # weather = Pipeline('s3://ajzcap3/weather_features.csv')
+    print("Loading Data")
+    # read in files from s3 bucket
+    energy = Pipeline('s3://ajzcap3/energy_dataset.csv')
+    weather = Pipeline('s3://ajzcap3/weather_features.csv')
 
-    # #make index a datetime object
-    # energy.my_reset_index()
-    # weather.my_reset_index()
+    #make index a datetime object
+    energy.my_reset_index()
+    weather.my_reset_index()
 
-    # # Clean Catagoricals
-    # weather.clean_categoricals(['weather_main'])
+    # Clean Catagoricals
+    weather.clean_categoricals(['weather_main'])
 
-    # # Drop columns
-    # weather_drop_cols = ['weather_icon', 'weather_description', 'weather_id', 'temp_min', 
-    #                 'temp_max', 'pressure', 'humidity','rain_1h', 'rain_3h', 'snow_3h',
-    #                  'clouds_all', 'dust', 'fog', 'haze','mist', 'rain', 'smoke', 
-    #                  'snow', 'squall', 'thunderstorm', 'clouds', 'drizzle', 'wind_deg']
+    # Drop columns
+    weather_drop_cols = ['weather_icon', 'weather_description', 'weather_id', 'temp_min', 
+                    'temp_max', 'pressure', 'humidity','rain_1h', 'rain_3h', 'snow_3h',
+                     'clouds_all', 'dust', 'fog', 'haze','mist', 'rain', 'smoke', 
+                     'snow', 'squall', 'thunderstorm', 'clouds', 'drizzle', 'wind_deg']
     
-    # energy_drop_cols = ['generation fossil coal-derived gas','generation fossil oil shale', 
-    #                     'generation fossil peat', 'generation geothermal',
-    #                     'generation marine', 'generation hydro pumped storage aggregated',
-    #                      'forecast wind offshore eday ahead', 'generation wind offshore', 
-    #                      'price day ahead', 'total load forecast', 'forecast wind onshore day ahead', 
-    #                      'forecast solar day ahead']
+    energy_drop_cols = ['generation fossil coal-derived gas','generation fossil oil shale', 
+                        'generation fossil peat', 'generation geothermal',
+                        'generation marine', 'generation hydro pumped storage aggregated',
+                         'forecast wind offshore eday ahead', 'generation wind offshore', 
+                         'price day ahead', 'total load forecast', 'forecast wind onshore day ahead', 
+                         'forecast solar day ahead']
 
-    # for i in weather_drop_cols:
-    #     weather.df.drop(i, axis=1, inplace=True)
-    # for i in energy_drop_cols:
-    #     energy.df.drop(i, axis=1, inplace=True)
+    for i in weather_drop_cols:
+        weather.df.drop(i, axis=1, inplace=True)
+    for i in energy_drop_cols:
+        energy.df.drop(i, axis=1, inplace=True)
 
-    # # propagate last valid observation forward to next valid to fill NaNs
-    # for i in energy.df.columns:
-    #     energy.df[i].fillna(method='pad', inplace=True)
+    # propagate last valid observation forward to next valid to fill NaNs
+    for i in energy.df.columns:
+        energy.df[i].fillna(method='pad', inplace=True)
 
     
 
-    # #Featurizing Cities
-    # city_df_list = weather.featurize_cities(['Valencia', 'Madrid', "Bilbao", ' Barcelona', 'Seville'])
+    #Featurizing Cities
+    city_df_list = weather.featurize_cities(['Valencia', 'Madrid', "Bilbao", ' Barcelona', 'Seville'])
 
-    # valencia = Pipeline.from_df(city_df_list[0])
-    # madrid = Pipeline.from_df(city_df_list[1])
-    # bilbao = Pipeline.from_df(city_df_list[2])
-    # barcelona = Pipeline.from_df(city_df_list[3])
-    # sevilla = Pipeline.from_df(city_df_list[4])
+    valencia = Pipeline.from_df(city_df_list[0])
+    madrid = Pipeline.from_df(city_df_list[1])
+    bilbao = Pipeline.from_df(city_df_list[2])
+    barcelona = Pipeline.from_df(city_df_list[3])
+    sevilla = Pipeline.from_df(city_df_list[4])
 
-    # # There has GOT to be a better way to do this
-    # vm = valencia.merge_dfs(madrid.df)
-    # bb = bilbao.merge_dfs(barcelona.df)
-    # sbb = sevilla.merge_dfs(bb.df)
-    # all_cities_df = vm.merge_dfs(sbb.df)
+    # There has GOT to be a better way to do this
+    vm = valencia.merge_dfs(madrid.df)
+    bb = bilbao.merge_dfs(barcelona.df)
+    sbb = sevilla.merge_dfs(bb.df)
+    all_cities_df = vm.merge_dfs(sbb.df)
 
-    # # clean residual col names that came from the merge and low feature importance features
-    # for i in ["Valencia_city_name", " Barcelona_city_name", "Bilbao_city_name", 
-    #         "Seville_city_name", "Madrid_city_name", 'Seville_wind_speed',
-    #          " Barcelona_wind_speed", "Valencia_temp"]:
-    #     all_cities_df.df.drop(i, axis=1, inplace=True)
+    # clean residual col names that came from the merge and low feature importance features
+    for i in ["Valencia_city_name", " Barcelona_city_name", "Bilbao_city_name", 
+            "Seville_city_name", "Madrid_city_name", 'Seville_wind_speed',
+             " Barcelona_wind_speed", "Valencia_temp"]:
+        all_cities_df.df.drop(i, axis=1, inplace=True)
 
-    # # Merge energy and weather
-    # print('\nMerging dataset')
+    # Merge energy and weather
+    print('\nMerging dataset')
   
-    # Merge energy with the featurized cities DF to make the complete DataFrame
-    # full_df = energy.merge_dfs(all_cities_df.df)
-    full_df = pd.read_csv('s3://ajzcap3/spain_data.csv')
+    Merge energy with the featurized cities DF to make the complete DataFrame
+    full_df = energy.merge_dfs(all_cities_df.df)
+    
 
     plot_corr_matrix(full_df.df)
     plt.savefig('images/full_corr_sparse.png')
