@@ -131,8 +131,8 @@ def plot_oob_error():
 if __name__ == '__main__':
     print("Loading Data")
     # read in files from s3 bucket
-    energy = Pipeline('s3://ajzcap2/energy_dataset.csv')
-    weather = Pipeline('s3://ajzcap2/weather_features.csv')
+    energy = Pipeline('s3://ajzcap3/energy_dataset.csv')
+    weather = Pipeline('s3://ajzcap3/weather_features.csv')
 
     #make index a datetime object
     energy.my_reset_index()

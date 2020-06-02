@@ -36,7 +36,16 @@ if __name__ == '__main__':
 
 
     gen_cols = ['coal', 'petrol_liquid', 'petrol_coke', 'nat_gas', 'other_gas', 'Nuclear', 'std_hydro', 'renewable_minus_hydro', 'wind', 'solar', 'wood', 'biomass', 'geothermal', 'hydro_pumped_storage', 'price', 'demand', 'idx']
-
+    spain_cols = [' generation biomass', 'generation fossil brown coal/lignite',
+       'generation fossil gas', 'generation fossil hard coal',
+       'generation fossil oil', 'generation hydro pumped storage consumption',
+       'generation hydro run-of-river and poundage',
+       'generation hydro water reservoir', 'generation nuclear',
+       'generation other', 'generation other renewable', 'generation solar',
+       'generation waste', 'generation wind onshore', 'total load actual',
+       'Valencia_wind_speed', 'Madrid_temp', 'Madrid_wind_speed',
+       'Seville_temp', 'Bilbao_temp', 'Bilbao_wind_speed', ' Barcelona_temp',
+       'price actual']
     # price units = cents / kWh
     # Generation units = thousand MWh
     # Demand = million kWh
