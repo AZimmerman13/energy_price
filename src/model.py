@@ -20,7 +20,7 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 if __name__ == '__main__':
     df = Pipeline('s3://ajzcap3/spain_data.csv')
 
-    df.getXy()
+    df.getXy('price actual')
 
     X_train = df.X_train
     y_train = df.y_train
