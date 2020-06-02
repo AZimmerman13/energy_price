@@ -18,7 +18,7 @@ from sklearn.metrics import mean_squared_error
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 if __name__ == '__main__':
-    full_df = Pipeline('s3://ajzcap3/spain_data.csv')
+    df = Pipeline('s3://ajzcap3/spain_data.csv')
 
     df.getXy()
 
