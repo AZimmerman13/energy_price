@@ -1,21 +1,21 @@
 # Capstone 2: Energy Price Prediction
 by Austin Zimmerman
 - [Part 1](#Capstone-2:-Energy-Price-Prediction)
-    - [Motivation](##Motivation)
-    - [Data](##Data)
+    - [Motivation](#Motivation)
+    - [Data](#Data)
     - [Pipeline and Workflow](#Pipeline)
-    - [EDA](##EDA)
-    - [Model Selection](###Model-Selection)
-        - [Random Forest](####Random-Forest)
-        - [SKLearn Pipline](####SKLearn-Pipeline)
-    - [Interpretation](##Interpretation)
-        - [Feature Importance](####Feature-Importance)
-        - [Partial Dependence](####Partial-Dependence)
+    - [EDA](#EDA)
+    - [Model Selection](#Model-Selection)
+        - [Random Forest](#Random-Forest)
+        - [SKLearn Pipline](#SKLearn-Pipeline)
+    - [Interpretation](#Interpretation)
+        - [Feature Importance](#Feature-Importance)
+        - [Partial Dependence](#Partial-Dependence)
     - [Next Steps](#Next-Steps)
 - [Part 2](#Part-2:-Continued-Model-Tuning-and-Greenhouse-Gas-Analysis)
-    - [Model Performance](##Model-Performance)
-    - [GHG and Price](##GHG-and-Price)
-    - [Further Discussion](##Further-Discussion)
+    - [Model Performance](#Model-Performance)
+    - [GHG and Price](#GHG-and-Price)
+    - [Further Discussion](#Further-Discussion)
 
 
 <p align="center">
