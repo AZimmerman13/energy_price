@@ -3,7 +3,7 @@ by Austin Zimmerman
 - [Part 1](#Capstone-2:-Energy-Price-Prediction)
     - [Motivation](##Motivation)
     - [Data](##Data)
-    - [Pipeline and Workflow](##Pipeline-and-Workflow)
+    - [Pipeline and Workflow](#Pipeline)
     - [EDA](##EDA)
     - [Model Selection](###Model-Selection)
         - [Random Forest](####Random-Forest)
@@ -49,7 +49,7 @@ The energy dataset concerned generation in MW for various energy sources through
        <img src="images/mw.png" width="500" height="240" />
 
 
-## Pipeline and Workflow
+## Pipeline and Workflow <a name="Pipeline"></a>
 
 <p align="center">
 <img src="images/Pipeline.png" width="500" />
