@@ -12,7 +12,8 @@ from sklearn.pipeline import Pipeline as SKPipe
 from sklearn.inspection import permutation_importance, plot_partial_dependence
 from sklearn.model_selection import GridSearchCV
 from src.pipeline import Pipeline
-from src.helpers import plot_corr_matrix, scree_plot, plot_num_estimators_mse
+from src.helpers import plot_corr_matrix, scree_plot, plot_num_estimators_mse, gridsearch,
+                        pdplots, compare_default_models, pca_with_scree, feat_imp_plots, plot_oob_error
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
 from statsmodels.stats.outliers_influence import variance_inflation_factor
@@ -20,113 +21,9 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 # plt.style.use('fivethirtyeight')
 
 
-def gridsearch():
-    parameters = {'n_estimators': (2, 5, 10, 20, 30), 
-                'max_depth': (None, 5, 7), 
-                'max_features': ('auto', 'sqrt', 'log2')}
-    rf = RandomForestRegressor(verbose=True, n_jobs=-1)
-    grid = GridSearchCV(rf, parameters, verbose=1, n_jobs=-1)
 
-    grid.fit(X_train,y_train)
-    gridscore_test = grid.score(X_test, y_test)
-    grisdcore_train = grid.score(X_train, y_train)
-    return gridscore_train, gridscore_test, grid.best_params_
 
-def pdplots():
 
-    first_pdp = ['generation fossil gas', 
-            'generation fossil hard coal', 'total load actual'] 
-             
-    second_pdp = ['generation other renewable',
-             'generation solar']
-
-    third_pdp = ['generation wind onshore', 'generation nuclear', 
-             'Madrid_wind_speed']
-
-    fourth_pdp = ['generation hydro pumped storage consumption']
-
-    plot_partial_dependence(rf, X_train, first_pdp, n_jobs=-1)
-    fig.suptitle("Partial Dependence of Energy Price on Various Generation Types")
-    fig.subplots_adjust(hspace=2.0, wspace=2.0)
-    plt.tight_layout()
-    plt.savefig('images/pd1.png')
-    plt.close()
-
-    plot_partial_dependence(rf, X_train, second_pdp, n_jobs=-1)
-    fig.suptitle("Partial Dependence of Energy Price on Various Generation Types")
-    fig.subplots_adjust(hspace=2.0, wspace=2.0)
-    plt.tight_layout()
-    plt.savefig('images/pd2.png')
-    plt.close()
-
-    plot_partial_dependence(rf, X_train, third_pdp, n_jobs=-1)
-    fig.suptitle("Partial Dependence of Energy Price on Various Generation Types")
-    fig.subplots_adjust(hspace=2.0, wspace=2.0)
-    plt.tight_layout()
-    plt.savefig('images/pd3.png')
-    plt.close()
-
-    plot_partial_dependence(rf, X_train, fourth_pdp, n_jobs=-1)
-    fig.suptitle("Partial Dependence of Energy Price on Various Generation Types")
-    fig.subplots_adjust(hspace=2.0, wspace=2.0)
-    plt.tight_layout()
-    plt.savefig('images/pd4.png')
-    plt.close()
-
-def compare_default_models():
-    models = [RandomForestRegressor(n_jobs=-1), Lasso(), Ridge(), LinearRegression(n_jobs=-1)]
-
-    for model in models:
-        pipe = SKPipe([('scaler', StandardScaler()), (f'{model}', model)], verbose=True)
-        pipe.fit(X_train, y_train)
-        
-        train_score = pipe.score(X_train, y_train)
-        test_score = pipe.score(X_test, y_test)
-        
-        print(f"{model} \n\ntest score = {test_score}\n train score = {train_score}\n\n")
-
-def pca_with_scree():
-    print("\nLet's try PCA")
-    pca = PCA(n_components=50)
-    X_pca = pca.fit_transform(full_df.X_std)
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    scree_plot(ax, pca, title="Scree Plot for Energy Principal Components")
-    plt.savefig('images/pca_full_sparse.png')
-    plt.close()
-
-def feat_imp_plots():
-    feature_names = full_df.X.columns
-    feat_imp = pd.DataFrame({'feature_name':feature_names, 'feat_imp': rf.feature_importances_})
-    feat_imp.sort_values('feat_imp',ascending=False,inplace=True)
-    fig, ax = plt.subplots(1, figsize=(8,10))
-    ax.barh(feat_imp['feature_name'].head(9), feat_imp['feat_imp'].head(9))
-    ax.invert_yaxis()
-    ax.set_title('Random Forest Feature Importance')
-    plt.tight_layout()
-    plt.savefig('images/feature_imp_sparse.png')
-    plt.close()
-
-def plot_oob_error():
-    fig, ax = plt.subplots()
-    oob_diff = []
-    oob = []
-    for i in list(range(2,20)):
-        rf = RandomForestRegressor(max_depth=i, max_features='auto', n_estimators=30, oob_score=True, n_jobs=-1)
-
-        rf.fit(X_train, y_train)
-
-        print(f"R2 Train = {rf.score(X_train, y_train)}")
-        print(f"R2 Test = {rf.score(X_test, y_test)}")
-        print(f"R2 Holdout = {rf.score(X_holdout, y_holdout)}")
-        print(f"OOB score = {rf.oob_score_}")
-        oob_diff.append(rf.score(X_train, y_train) - rf.oob_score_)
-        oob.append(rf.oob_score_)
-
-    ax.plot(oob_diff, color='red')
-    ax.plot(oob, color='blue')
-    ax.set_title("Reducing OOB Error by limiting max_depth")
-    plt.savefig('images/oob.png')
 
 if __name__ == '__main__':
     print("Loading Data")
