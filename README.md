@@ -21,11 +21,13 @@ by Austin Zimmerman
 <p align="center">
        <img src="images/energy_price.png" width="700" height="400" />
 
-## Motivation <a name="Motivation"></a> [(top)](#Part-1)
+## Motivation <a name="Motivation"></a> 
 
 For many years, solar panels and wind turbines have been hailed as the harbinger of a renewable energy revolution that has only just very recently begun to take shape on a global scale.  The chief complaint from those hesitant to adopt or incorporate renewable energy sources was almost always their effect on energy prices.  At the time of writing, the world is engulfed in a novel Coronavirus pandemic that has shut down industry and social interaction around the globe.  As viral videos of crystal clear streams and suburban big cats make their way around the world, many are starting to think more seriously about our impact on the planet.
 
 With a fair bit of inspiration from a [recent paper on *Tackling Climate Change with Machine Learning*](https://arxiv.org/abs/1906.05433) and encouragement from news stories like [this one](https://www.theguardian.com/business/2020/jun/02/energy-firms-urged-to-mothball-coal-plants-as-cost-of-solar-tumbles), I have made an effort to better understand the forces that act upon energy prices. In this analysis I endeavor to build a model that can predict energy prices based on generation and weather data and provide some insight as to how different sources affect those prices.
+
+[(back to top)](#Part-1)
 
 
 ## Data <a name="Data"></a>
@@ -127,6 +129,8 @@ The energy dataset provides a much more visually interesting (and analytically h
 
 </td></tr> </table>
 
+[(back to top)](#Part-1)
+
 ### Model Selection <a name="Model-Selection"></a>
 
 #### Random Forest <a name="Random-Forest"></a>
@@ -190,7 +194,7 @@ An interesting plot, hydro pumped storage just misses the top ten feature import
 
 
 
-
+[(back to top)](#Part-1)
 ---
 
 
@@ -205,9 +209,6 @@ I had hoped originally to bring in data from the United states to make Part 1 a 
 While I *was* able to bring in monthly U.S. data going back to 2012, it made up only 92 datapoints, not enough for a credible machine-learning based analysis.
 
 Adding to this the fact that a similar weather analysis to the one in Spain would not be possible due to the size of the united states, I pivoted back to the Spain Data to see if any further model tuning could be acheived before undertaking my GHG analysis.  With an eye on returning to U.S. data in the future, I removed the weather data (the size of the U.S. makes weather from a few cities an impractical measure of pretty much anything) and reingineered several features to fit with the shape of the US data.
-
-
-
 
 
 
@@ -261,6 +262,8 @@ With these calculations taken care of, I can plot total emissions against energy
 My intuition is that if you showed this chart to someone as few as 15 years ago, they might have told you you'd gotten your axes wrong.  However, as the cost of building and operating renewable power plants has cratered in recent years, so too has the cost of low-carbon electricity.
 
 This is already having drastic implications for solutions to what is recognized scientifically as one of the most dire problems facing humanity.  In the US, several states have adopted aggressive renewable energy goals with benchmarks as early as 2030.  As charts like this keep making their way onto the desks policy makers, they drastically improve the chances of turning electricity generation from a necessary evil into a flourishing economic sector, ripe with innovation and contributing *positively* to the survival of future generations.
+
+[(Back to top)](#Part-1)
 
 
 ## Further Discussion <a name="Further-Discussion"></a>
@@ -320,7 +323,7 @@ Certainly, this general methodology can be applied to U.S. Data, but the substan
 #### Apply this model to U.S. Data
 A this point we have a model that performs quite well at predicting energy prices given generation statistics and a few key weather metrics.  With a chance to expand on this process I would hope to apply this model to a united states dataset.  
 
-
+[(Back to top)](#Part-1)
 
 
 ### Credits
