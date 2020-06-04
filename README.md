@@ -1,6 +1,6 @@
-# Capstone 2: Energy Price Prediction
+# Capstone 2: Energy Price Prediction <a name="Part-1"></a>
 by Austin Zimmerman
-- [Part 1](#Capstone-2:-Energy-Price-Prediction)
+- [Part 1](#Part-1)
     - [Motivation](#Motivation)
     - [Data](#Data)
     - [Pipeline and Workflow](#Pipeline)
@@ -21,7 +21,7 @@ by Austin Zimmerman
 <p align="center">
        <img src="images/energy_price.png" width="700" height="400" />
 
-## Motivation <a name="Motivation"></a>
+## Motivation <a name="Motivation"></a> [(top)](#Part-1)
 
 For many years, solar panels and wind turbines have been hailed as the harbinger of a renewable energy revolution that has only just very recently begun to take shape on a global scale.  The chief complaint from those hesitant to adopt or incorporate renewable energy sources was almost always their effect on energy prices.  At the time of writing, the world is engulfed in a novel Coronavirus pandemic that has shut down industry and social interaction around the globe.  As viral videos of crystal clear streams and suburban big cats make their way around the world, many are starting to think more seriously about our impact on the planet.
 
