@@ -91,7 +91,7 @@ I had a suspicion that weather_description and weather_id were redundant as they
 weather_description and weather_id match nearly 1:1, and weather_main contains faily intuitive groupings of weather types.  I opted to one-hot encode weather_main and discard the other two to minimize dimensionality.
 
 
-#### Correlation Matrices <a name="Correlation Matrices"></a>
+#### Correlation Matrix <a name="Correlation-Matrices"></a>
 
 To avoid making a single, massive, unreadable correlation matrix with all of my features, I decided to add price to the weather DataFrame and make a separate, moderately-readable one for the subset.  When it comes to weather, it appears that wind speed and temperature are the only features which are routinely correlated with energy price (bottom row).
 
@@ -136,7 +136,7 @@ From the outset, I was planning on using a random forest regressor on this data.
 
 A GridSearchCV reported 30 as the optimum number of estimators.  Running my RandomForest with 30 estimators produced surprisingly high r^2 scores for both my train and test data, **0.97** and **0.82** respectively.  These were good results, but I came away from them concerned that I had introduced some leakage that was causing my model to overfit.
 
-#### SKlearn Pipeline <a name="SKlearn Pipeline"></a>
+#### SKlearn Pipeline <a name="SKlearn-Pipeline"></a>
 To address these concerns, I used SKlearn's pipeline class to compare my random forest with 2 other models.  The similarity between results from the sklearn pipeline and my own reassured me that I had not caused any leakage with my treatment of the standardization and train-test-split in my custom pipeline.  
 
 
@@ -152,7 +152,7 @@ These results indicate that the relationships at play between the features and t
 
 
 ## Interpretation <a name="Interpretation"></a>
-#### Feature Importance <a name="Feature Importance"></a>
+#### Feature Importance <a name="Feature-Importance"></a>
 I hoped to gain insight into the effect of my features on energy price by plotting the feature importances for my RandomForestRegressor.  The results of this are shown below, with gas and coal generation leading the list, followed by total load (demand), hydropower, and a feature called 'generation other renewable' on which the data documentation sheds unfortunately little light.
 
 * Not totally sure what is going on here? Check out the [documentation for Feature Importance](https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html).
@@ -161,7 +161,7 @@ I hoped to gain insight into the effect of my features on energy price by plotti
 ![](images/feature_imp_sparse.png)
 
 
-#### Partial Dependence <a name="Partial Dependence"></a>
+#### Partial Dependence <a name="Partial-Dependence"></a>
 While the feature importance shows the magnitude of a feature's effect on price, it does not tell us anything about directionality.  Partial dependence plots help to shed some light on how some of these features impact energy prices.
 
 * Not sure how to interpret these graphs? Check out the documentation [here](https://scikit-learn.org/stable/modules/partial_dependence.html).
@@ -196,7 +196,7 @@ An interesting plot, hydro pumped storage just misses the top ten feature import
 
 
 
-# Part 2: Continued Model Tuning and Greenhouse Gas Analysis <a name="Part 2"></a>
+# Part 2: Continued Model Tuning and Greenhouse Gas Analysis <a name="Part-2"></a>
 
 Throughout this section of the project I will be referring often to greenhouse gasses (GHGs), which are, simply put, the reason that our planet is warming at unprecedented rates.  GHGs trap the sun's heat within our atmosphere where it would usually escape into space, and they are a product of nearly all processes in industry, transportation, and electricity generation.
 
@@ -211,11 +211,11 @@ Adding to this the fact that a similar weather analysis to the one in Spain woul
 
 
 
-## Model Performance <a name="Model Performance"></a>
+## Model Performance <a name="Model-Performance"></a>
 Upon revisting this model, I had hoped to get a bit more performance out of it, mainly trying to reduce the gap between train and test error by tuning the hyperparameters.  Unfortunately, Trials of various values for max_depth, max_features, n_estimators, ccp_alpha could not close the gap without bringing both test and train scores into the neighborhood of 0.65.  I decided that a slightly overfit model would be preferable to a higher bias model that scored substantially worse.
 
 
-## GHG and Price <a name="GHG and Price"></a>
+## GHG and Price <a name="GHG-and-Price"></a>
 
 I already had all of the data I needed to begin to make sense of the relationship between price and emission levels, I simply needed to perform a weighted sum of the values in each row and, voila, I would have a measure of how much GHG emission was produced for each point in my dataset.
 
@@ -263,7 +263,7 @@ My intuition is that if you showed this chart to someone as few as 15 years ago,
 This is already having drastic implications for solutions to what is recognized scientifically as one of the most dire problems facing humanity.  In the US, several states have adopted aggressive renewable energy goals with benchmarks as early as 2030.  As charts like this keep making their way onto the desks policy makers, they drastically improve the chances of turning electricity generation from a necessary evil into a flourishing economic sector, ripe with innovation and contributing *positively* to the survival of future generations.
 
 
-## Further Discussion <a name="Further Discussion"></a>
+## Further Discussion <a name="Further-Discussion"></a>
 
 
 For the year 2018
@@ -316,7 +316,7 @@ Certainly, this general methodology can be applied to U.S. Data, but the substan
 
 
 
-## Next steps <a name="Next Steps"></a>
+## Next steps <a name="Next-Steps"></a>
 #### Apply this model to U.S. Data
 A this point we have a model that performs quite well at predicting energy prices given generation statistics and a few key weather metrics.  With a chance to expand on this process I would hope to apply this model to a united states dataset.  
 
