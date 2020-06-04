@@ -12,7 +12,7 @@ by Austin Zimmerman
         - [Feature Importance](#Feature-Importance)
         - [Partial Dependence](#Partial-Dependence)
     - [Next Steps](#Next-Steps)
-- [Part 2](#Part-2:-Continued-Model-Tuning-and-Greenhouse-Gas-Analysis)
+- [Part 2](#Part-2)
     - [Model Performance](#Model-Performance)
     - [GHG and Price](#GHG-and-Price)
     - [Further Discussion](#Further-Discussion)
@@ -27,7 +27,6 @@ For many years, solar panels and wind turbines have been hailed as the harbinger
 
 With a fair bit of inspiration from a [recent paper on *Tackling Climate Change with Machine Learning*](https://arxiv.org/abs/1906.05433) and encouragement from news stories like [this one](https://www.theguardian.com/business/2020/jun/02/energy-firms-urged-to-mothball-coal-plants-as-cost-of-solar-tumbles), I have made an effort to better understand the forces that act upon energy prices. In this analysis I endeavor to build a model that can predict energy prices based on generation and weather data and provide some insight as to how different sources affect those prices.
 
-[(back to top)](#Part-1)
 
 
 ## Data <a name="Data"></a>
@@ -60,7 +59,7 @@ I gave myself the challenge of working with the AWS suite on this project, takin
 
 I created a Pipeline class to load data in from S3 (using the s3fs library) and apply the necessary cleaning and transformations.  I also worked a bit with SKlearn's built-in Pipeline class.  The biggest speed-bump at this stage was turning the 'city_name' feature into a series of features that represented weather data for each city.  While this solved the problem of having duplicate indices (one for each city at each timestamp), it sent my dimensionality skyward very quickly.
 
-
+[(Back to top)](#Part-1)
 ## EDA <a name="EDA"></a>
 
 EDA turned out to be very useful for narrowing down my long list of features into something a bit less computationally expensive and more interpretable.
@@ -129,7 +128,7 @@ The energy dataset provides a much more visually interesting (and analytically h
 
 </td></tr> </table>
 
-[(back to top)](#Part-1)
+[(Back to top)](#Part-1)
 
 ### Model Selection <a name="Model-Selection"></a>
 
@@ -194,7 +193,7 @@ An interesting plot, hydro pumped storage just misses the top ten feature import
 
 
 
-[(back to top)](#Part-1)
+[(Back to top)](#Part-1)
 ---
 
 
