@@ -77,10 +77,10 @@ def scree_plot(ax, pca, n_components_to_plot=8, title=None): # Credit: Galvanize
     ax.set_xticklabels(ind, fontsize=12)
     ax.set_ylim(0, max(vals) + 0.05)
     ax.set_xlim(0 - 0.45, n_components_to_plot + 0.45)
-    ax.set_xlabel("Principal Component", fontsize=12)
-    ax.set_ylabel("Variance Explained (%)", fontsize=12)
+    ax.set_xlabel("Principal Component", fontsize=16)
+    ax.set_ylabel("Variance Explained (%)", fontsize=16)
     if title is not None:
-        ax.set_title(title, fontsize=16)
+        ax.set_title(title, fontsize=20)
 
 
 def plot_num_estimators_mse(num_estimator_list, train_errors_rf, test_errors_rf):
@@ -158,14 +158,16 @@ def compare_default_models():
         
         print(f"{model} \n\ntest score = {test_score}\n train score = {train_score}\n\n")
 
-def pca_with_scree():
+def pca_with_scree(full_df):
+    '''Takes a Pipeline object
+    '''
     print("\nLet's try PCA")
-    pca = PCA(n_components=50)
+    pca = PCA()
     X_pca = pca.fit_transform(full_df.X_std)
 
     fig, ax = plt.subplots(figsize=(10, 6))
     scree_plot(ax, pca, title="Scree Plot for Energy Principal Components")
-    plt.savefig('images/pca_full_sparse.png')
+    plt.savefig('images/pca_part2.png')
     plt.close()
 
 def feat_imp_plots(full_df, rf):

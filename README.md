@@ -61,6 +61,11 @@ I created a Pipeline class to load data in from S3 (using the s3fs library) and 
 
 [(Back to top)](#Part-1)
 ## EDA <a name="EDA"></a>
+#### How much signal exists in this data?
+I ran a Principal Componant Analysis in order to determine how well my features could combine to explain the targets.  The results show that 93% of the variance is explained in 8 principal components.  While this PCA is not terribly useful for interpretation, it does confirm to us that significant signal does exist in the data, and that modeling it will be a worthwhile experience.
+
+<p align="center">
+<img src="images/pca_part2.png" width="700" />
 
 EDA turned out to be very useful for narrowing down my long list of features into something a bit less computationally expensive and more interpretable.
 
@@ -130,10 +135,11 @@ The energy dataset provides a much more visually interesting (and analytically h
 
 [(Back to top)](#Part-1)
 
+
 ### Model Selection <a name="Model-Selection"></a>
 
 #### Random Forest <a name="Random-Forest"></a>
-From the outset, I was planning on using a random forest regressor on this data.  After first running the regressor with default parameters, I quickly found that I could save on computation with very little increase in error.  The elbow of this MSE plot is around 10 estimators, and the MSE ++value is nearly the same as MSE at 100 estimators (the default).
+From the outset, I was planning on using a random forest regressor on this data.  After first running the regressor with default parameters, I quickly found that I could save on computation with very little increase in error.  The elbow of this MSE plot is around 10 estimators, and the MSE value is nearly the same as MSE at 100 estimators (the default).
 
 ![num estimators plot](images/rf_num_estimator_plot.png)
 
@@ -328,6 +334,14 @@ A this point we have a model that performs quite well at predicting energy price
 
 ### Credits
 https://www.eia.gov/energyexplained/energy-and-the-environment/where-greenhouse-gases-come-from.php
+
+https://aleasoft.com/spain-imports-electricity-france-2018/
+
+https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a
+
+https://en.wikipedia.org/wiki/Life-cycle_greenhouse-gas_emissions_of_energy_sources
+
+
 
 
 ### Image credits:
