@@ -263,7 +263,7 @@ for each row in dataset:
 With these calculations taken care of, I can plot total emissions against energy price (converted to USD)
 
 <p align="center">
-<img src="images/ghg_over_price.png" width="700" />
+<img src="images/ghg_over_price_old.png" width="700" />
 
 My intuition is that if you showed this chart to someone as few as 15 years ago, they might have told you you'd gotten your axes wrong.  However, as the cost of building and operating renewable power plants has cratered in recent years, so too has the cost of low-carbon electricity.
 
