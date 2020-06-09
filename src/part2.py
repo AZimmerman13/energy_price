@@ -36,6 +36,7 @@ if __name__ == '__main__':
     df.df['coal'] = df.df['generation fossil hard coal'] + df.df['generation fossil brown coal/lignite']
     df.df.drop(['generation fossil hard coal','generation fossil brown coal/lignite'], inplace=True, axis=1)
 
+    # Train Test Split
     df.getXy('price actual')
     df.create_holdout()
 
@@ -93,12 +94,13 @@ if __name__ == '__main__':
         plt.close()
 
 
-
+    # do some #Analysis
     ghg = df.df[ghg_cols]
     ghg['kg_CO2e'] = ghg.dot(ipcc)
-    # df.df['emission'] = ghg.dot(ipcc)
+    # Convert Euros to Dollars for final plot
     ghg['price_dollars'] = df.df['price actual'] * 1.12
 
+    
     plot_ghg_over_price = True
     if plot_ghg_over_price:
         fig, ax = plt.subplots()
@@ -111,6 +113,7 @@ if __name__ == '__main__':
         plt.close()
 
     # feat_imp_plots(df, rf)
+    # Re-plot EDA
     plot_eda=False
     if plot_eda:
         fig, ax = plt.subplots()
