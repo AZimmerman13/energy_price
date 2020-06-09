@@ -105,33 +105,17 @@ To avoid making a single, massive, unreadable correlation matrix with all of my 
 
 Energy
 
-The energy dataset provides a much more visually interesting (and analytically helpful) matrix.  Lignite, gas, coal, and oil generation , along with total load, all appear positively correlated with price.  Meanwhile, onshore wind and pumped storage consumption appear to be negatively correlated with price.
+A breakdown of the energy dataset gives us a sense of how our prices are distributed.  Perhaps a bit skewed but relatively normal looking.
 
 
+<p align="center">
+<img src="images/price_eda.png" width="500"/>
 
+This plot shows the iconic bimodal demand curve over the course of an average day in my dataset.  Each generation source loads on differently throughout the day (except for nuclear, which stays constant).  Interesting but not surprising to note how wind and solar peak later than other sources.  It is however, a bit surprsing to see wind generation so flat.  Renewable sources get a reputation for being intermittent, but that is not the story that this plot tells.
 
-<table>
-<tr><th> </th><th> </th></tr>
-<tr><td>
+<p align="center">
+<img src="images/hourly_demand_edit.png" width="600"/>
 
-![](images/load_eda.png)
-
-</td><td>
-
-![](images/price_eda.png)
-
-</td></tr> </table>
-<table>
-<tr><th> </th><th> </th></tr>
-<tr><td>
-
-![](images/coal_eda.png)
-
-</td><td>
-
-![](images/wind_eda.png)
-
-</td></tr> </table>
 
 [(Back to top)](#Part-1)
 
