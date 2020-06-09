@@ -20,11 +20,6 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 # plt.style.use('fivethirtyeight')
 
-
-
-
-
-
 if __name__ == '__main__':
     print("Loading Data")
     # read in files from s3 bucket

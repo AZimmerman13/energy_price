@@ -36,11 +36,6 @@ if __name__ == '__main__':
     df.df['coal'] = df.df['generation fossil hard coal'] + df.df['generation fossil brown coal/lignite']
     df.df.drop(['generation fossil hard coal','generation fossil brown coal/lignite'], inplace=True, axis=1)
 
-
-
-
-
-
     df.getXy('price actual')
     df.create_holdout()
 
