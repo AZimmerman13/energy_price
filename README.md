@@ -213,9 +213,9 @@ I already had all of the data I needed to begin to make sense of the relationshi
 
 Thanks to a 2014 IPCC report on the global warming potential associated with electricity generation sources, I had weights by which to multiply each feature of my dataset, and could calculate from there the total emissions for each row.
 
-
+<p align="center">
 <table>
-<tr><th>Spain </th><th>United States</th></tr>
+<tr><th> </th><th> </th></tr>
 <tr><td>
 
 | Generation Source    | grams CO<sub>2</sub>e |
@@ -232,10 +232,10 @@ Thanks to a 2014 IPCC report on the global warming potential associated with ele
 </td><td>
 
 
-<p align="center">
-<img src="images/ipcc_bar.png" width="300" />
+<img src="images/ipcc_bar.png" width="600" />
 
 </td></tr> </table>
+</p>
 
 Here is a bit of pseudocode for the process. In practice, it is the dot product of the weights vector with the dataframe:
 
@@ -268,7 +268,7 @@ This is already having drastic implications for solutions to what is recognized 
 ## Further Discussion <a name="Further-Discussion"></a>
 
 
-For the year 2018
+Total electricity generation for 2018:
 
 
 <table>
@@ -316,7 +316,7 @@ Certainly, this general methodology can be applied to U.S. Data, but the substan
 
 ## Next steps <a name="Next-Steps"></a>
 #### Apply this model to U.S. Data
-A this point we have a model that performs quite well at predicting energy prices given generation statistics and a few key weather metrics.  With a chance to expand on this process I would hope to apply this model to a united states dataset.  
+A this point we have a model that performs quite well at predicting energy prices given generation statistics and a few key weather metrics.  With a chance to expand on this process I would hope to apply this model to a United States dataset.  
 
 [(Back to top)](#Part-1)
 
