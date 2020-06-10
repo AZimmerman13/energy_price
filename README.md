@@ -11,11 +11,11 @@ by Austin Zimmerman
     - [Interpretation](#Interpretation)
         - [Feature Importance](#Feature-Importance)
         - [Partial Dependence](#Partial-Dependence)
-    - [Next Steps](#Next-Steps)
 - [Part 2](#Part-2)
     - [Model Performance](#Model-Performance)
     - [GHG and Price](#GHG-and-Price)
     - [Further Discussion](#Further-Discussion)
+    - [Next Steps](#Next-Steps)
 
 
 <p align="center">
