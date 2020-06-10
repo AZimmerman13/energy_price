@@ -30,7 +30,7 @@ With a fair bit of inspiration from a [recent paper on *Tackling Climate Change 
 
 
 ## Data <a name="Data"></a>
-This publicly available dataset came in two seperate .csv files (weather and energy) posted on [Kaggle](https://www.kaggle.com/nicholasjhana/energy-consumption-generation-prices-and-weather#weather_features.csv) in late 2019.  Some previous work has been done wit this data to understand the effect of time on energy prices, but I was more interested in determining the effect of different energy generation mixtures and weather.  As such, the following analysis does not consider the effects of the time-series on price.
+This publicly available dataset came in two seperate .csv files (weather and energy) posted on [Kaggle](https://www.kaggle.com/nicholasjhana/energy-consumption-generation-prices-and-weather#weather_features.csv) in late 2019.  Some previous work has been done with this data to understand the effect of time on energy prices, but I was more interested in determining the effect of different energy generation mixtures and weather.  As such, the following analysis does not consider the effects of the time-series on price.
 
 
 The combined dataset contained 178,000 rows of hourly data between January 2015 and Deember 2018. The target of my predictions was real-time energy price in EUR/MWh provided by the energy csv.
@@ -62,7 +62,7 @@ I created a Pipeline class to load data in from S3 (using the s3fs library) and 
 [(Back to top)](#Part-1)
 ## EDA <a name="EDA"></a>
 #### How much signal exists in this data?
-I ran a Principal Componant Analysis in order to determine how well my features could combine to explain the targets.  The results show that 93% of the variance is explained in 8 principal components.  While this PCA is not terribly useful for interpretation, it does confirm to us that significant signal does exist in the data, and that modeling it will be a worthwhile experience.
+I ran a Principal Componant Analysis in order to determine how well my features could combine to explain the targets.  The results show that 93% of the variance is explained in 8 principal components.  While this PCA is not terribly useful for interpretation, it does confirm to us that significant signal does exist in the data, and that modeling it will be a worthwhile exercise.
 
 <p align="center">
 <img src="images/pca_part2.png" width="700" />
@@ -97,7 +97,7 @@ I had a suspicion that weather_description and weather_id were redundant as they
 weather_description and weather_id match nearly 1:1, and weather_main contains faily intuitive groupings of weather types.  I opted to one-hot encode weather_main and discard the other two to minimize dimensionality.
 
 
-#### Correlation Matrix <a name="Correlation-Matrices"></a>
+#### Correlation Matrix <a name="Correlation-Matrix"></a>
 
 To avoid making a single, massive, unreadable correlation matrix with all of my features, I decided to add price to the weather DataFrame and make a separate, moderately-readable one for the subset.  When it comes to weather, it appears that wind speed and temperature are the only features which are routinely correlated with energy price (bottom row).
 
@@ -127,14 +127,14 @@ From the outset, I was planning on using a random forest regressor on this data.
 
 ![num estimators plot](images/rf_num_estimator_plot.png)
 
-A GridSearchCV reported 30 as the optimum number of estimators.  Running my RandomForest with 30 estimators produced surprisingly high r^2 scores for both my train and test data, **0.97** and **0.82** respectively.  These were good results, but I came away from them concerned that I had introduced some leakage that was causing my model to overfit.
+A GridSearchCV reported 30 as the optimum number of estimators.  Running my RandomForest with 30 estimators produced surprisingly high R<sup>2</sup> scores for both my train and test data, **0.97** and **0.82** respectively.  These were good results, but I came away from them concerned that I had introduced some leakage that was causing my model to overfit.
 
 #### SKlearn Pipeline <a name="SKlearn-Pipeline"></a>
 To address these concerns, I used SKlearn's pipeline class to compare my random forest with 2 other models.  The similarity between results from the sklearn pipeline and my own reassured me that I had not caused any leakage with my treatment of the standardization and train-test-split in my custom pipeline.  
 
 
 
-| Model                 | Train R^2 | Test R^2 | OOB Score   |
+| Model                 | Train R<sup>2</sup> | Test R<sup>2</sup> | OOB Score   |
 |-----------------------|-----------|----------|-------------|
 | RandomForestRegressor | 0.97      | 0.83     | 0.81        |
 | Lasso(alpha=0.03)     | 0.44      | 0.43     |             |
@@ -146,7 +146,7 @@ These results indicate that the relationships at play between the features and t
 
 ## Interpretation <a name="Interpretation"></a>
 #### Feature Importance <a name="Feature-Importance"></a>
-I hoped to gain insight into the effect of my features on energy price by plotting the feature importances for my RandomForestRegressor.  The results of this are shown below, with gas and coal generation leading the list, followed by total load (demand), hydropower, and a feature called 'generation other renewable' on which the data documentation sheds unfortunately little light.
+I hoped to gain insight into the effect of my features on energy price by plotting the feature importances for my RandomForestRegressor.  The results of this are shown below, with gas and coal generation leading the list, followed by total load (demand), hydropower, and a feature called 'generation other renewable' on which the data documentation sheds unfortunately little light.  Generally speaking, a feature importance plot shows how heavily a given feature affects the target.
 
 * Not totally sure what is going on here? Check out the [documentation for Feature Importance](https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html).
 
@@ -155,9 +155,9 @@ I hoped to gain insight into the effect of my features on energy price by plotti
 
 
 #### Partial Dependence <a name="Partial-Dependence"></a>
-While the feature importance shows the magnitude of a feature's effect on price, it does not tell us anything about directionality.  Partial dependence plots help to shed some light on how some of these features impact energy prices.
+While the feature importance shows the magnitude of a feature's effect on price, it does not tell us anything about directionality.  Partial dependence plots help to shed some light on how some of these features impact energy prices.  Partial dependence plots show how the target changes alongside a selected feature, hollding all other features constant.
 
-* Not sure how to interpret these graphs? Check out the documentation [here](https://scikit-learn.org/stable/modules/partial_dependence.html).
+* Still not sure how to interpret these graphs? Check out the documentation [here](https://scikit-learn.org/stable/modules/partial_dependence.html).
 
 
 Here we see the top three most important features, each clearly with a positive effect on price.
@@ -194,11 +194,11 @@ An interesting plot, hydro pumped storage just misses the top ten feature import
 
 Throughout this section of the project I will be referring often to greenhouse gasses (GHGs), which are, simply put, the reason that our planet is warming at unprecedented rates.  GHGs trap the sun's heat within our atmosphere where it would usually escape into space, and they are a product of nearly all processes in industry, transportation, and electricity generation.
 
-I had hoped originally to bring in data from the United states to make Part 1 a bit more applicable to myself and the people who may be interested in reading this analysis.  After spending quite some time wrestling with the data that was publicly available, I determined that bringing in nationwide data for the U.S. would not be feasible under the given time constraints.  While hourly energy data is certainly collected in the United States, the data presented back to the public is almost exclusively at a monthly or larger time-scale.
+I had hoped originally to bring in data from the United states to make Part 1 a bit more applicable to myself and the people who may be interested in reading this analysis.  After spending quite some time wrestling with the data that was publicly available, I determined that bringing in hourly data for the U.S. would have to wait for another time.  While hourly energy data is certainly collected in the United States, the data presented back to the public is almost exclusively at a monthly or larger time-scale.
 
 While I *was* able to bring in monthly U.S. data going back to 2012, it made up only 92 datapoints, not enough for a credible machine-learning based analysis.
 
-Adding to this the fact that a similar weather analysis to the one in Spain would not be possible due to the size of the united states, I pivoted back to the Spain Data to see if any further model tuning could be acheived before undertaking my GHG analysis.  With an eye on returning to U.S. data in the future, I removed the weather data (the size of the U.S. makes weather from a few cities an impractical measure of pretty much anything) and reingineered several features to fit with the shape of the US data.
+Adding to this the fact that a similar weather analysis to the one in Spain would not be possible due to the size of the United States, I pivoted back to the Spain data to see if any further model tuning could be acheived before undertaking my GHG analysis.  With an eye on returning to U.S. data in the future, I removed the weather data and reingineered several features to fit with the shape of the US data.
 
 
 
@@ -213,7 +213,10 @@ I already had all of the data I needed to begin to make sense of the relationshi
 
 Thanks to a 2014 IPCC report on the global warming potential associated with electricity generation sources, I had weights by which to multiply each feature of my dataset, and could calculate from there the total emissions for each row.
 
-<center>
+
+<table>
+<tr><th>Spain </th><th>United States</th></tr>
+<tr><td>
 
 | Generation Source    | grams CO<sub>2</sub>e |
 |----------------------|-----------------------|
@@ -226,7 +229,13 @@ Thanks to a 2014 IPCC report on the global warming potential associated with ele
 | Nuclear              | 12         
 | Wind                 | 11.5       
 
-</center>
+</td><td>
+
+
+<p align="center">
+<img src="images/ipcc_bar.png" width="300" />
+
+</td></tr> </table>
 
 Here is a bit of pseudocode for the process. In practice, it is the dot product of the weights vector with the dataframe:
 
@@ -299,10 +308,6 @@ For the year 2018
 
 
 It is important to note that, in addition to the differences in both volume and distribution between Spain and the U.S., Spain does not possess any significant fossil resources of their own.  This is undoubtedly a contributing factor to the results in our price vs. emission plot and could serve as a potential roadblock to making this happen in the U.S.
-
-
-
-   spain doesnt have any fossil resources of its own
 
 
 Certainly, this general methodology can be applied to U.S. Data, but the substantial differences in energy mixtures between the two nations means that a new training process would be required.  When we compare the data side by side, it is not only scale, but proportion that sets the two countries apart.  No doubt, the Spain model has learned valuable information and could be useful for a transfer learning approach to the U.S. data.

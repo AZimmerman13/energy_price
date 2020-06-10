@@ -50,7 +50,7 @@ if __name__ == '__main__':
     df.standardize(X_train)
     X_std = df.X_std
 
-    #Best Model
+    # Modeling
     random_forest = False
     extra_trees = False
     do_pca = False
@@ -71,8 +71,6 @@ if __name__ == '__main__':
     if do_pca:
         pca_with_scree(df)
 
-    
-
     # GHG analysis
     # with no extra conversion, results will be in kg CO2e
 
@@ -92,7 +90,6 @@ if __name__ == '__main__':
         plt.tight_layout()
         plt.savefig('images/ipcc_bar.png')
         plt.close()
-
 
     # do some #Analysis
     ghg = df.df[ghg_cols]
